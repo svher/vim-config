@@ -7,7 +7,7 @@ brew install vim cmake python go nodejs
 
 echo Installing Vim plugins
 ln $(pwd)/.vimrc.1 ~/.vimrc
-mkdir tmp
+mkdir ~/.vim/tmp
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 
