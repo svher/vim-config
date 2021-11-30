@@ -5,7 +5,8 @@ set mouse=a
 let mapleader = ","
 map <leader>vimrc :tabe ~/.vim/.vimrc<cr>
 map <leader>go :set syntax=go<cr>
-map <leader>gor :w<cr>:!go run %<cr>
+map <leader>gr :w<cr>:!go run % 
+map <leader>grr :w<cr>:!go run %<cr>
 map <leader>reload :source ~/.vim/.vimrc<cr>
 
 map <ScrollWheelUp> <C-Y>

@@ -102,3 +102,4 @@ source $ZSH/oh-my-zsh.sh
 
 export GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
+alias gobr="go build && ./$(basename $(pwd))"
