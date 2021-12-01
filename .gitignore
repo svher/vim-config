@@ -1,3 +1,4 @@
 bundle/
 tmp/
 .netrwhist
+.DS_Store
