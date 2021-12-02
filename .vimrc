@@ -10,14 +10,19 @@ set softtabstop=4
 set shiftwidth=4
 " set serach highlights
 set hls
+set history=200
+
+" Practical Vim page 68
+" Command-Line mode auto completition like zsh
+set wildmenu
+set wildmode=full
 
 let mapleader = ","
 map <leader>vimrc :tabe ~/.vim/.vimrc<cr>
 map <leader>go :set syntax=go<cr>
-map <leader>gr :w<cr>:!go run % 
-map <leader>grr :w<cr>:!go run %<cr>
+map <leader>grr :w<cr>:!go run % 
+map <leader>gr :w<cr>:!go run %<cr>
 map <leader>gi :GoImports<cr>
-map <leader>reload :source ~/.vim/.vimrc<cr>
 
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
@@ -39,7 +44,14 @@ set signcolumn=no
 set completeopt-=preview
 let g:ycm_always_populate_location_list = 1
 
+" Airline config
+if !exists("g:airline_symbols")
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.maxlinenr = ""
+
 set completeopt=menu,menuone
 
 " Reload vim config
 autocmd bufwritepost .vimrc source <afile>
+
