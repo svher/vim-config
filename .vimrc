@@ -17,22 +17,40 @@ set hidden
 set incsearch
 " always show at least one line above/below the cursor
 set scrolloff=5
+set nowrap
+set ignorecase
+set smartcase
+function! CurDir()
+    let curdir = substitute(getcwd(), $HOME, "~", "g")
+    return curdir
+endfunction
 
 " Practical Vim page 68
 " Command-Line mode auto completition like zsh
 set wildmenu
 set wildmode=full
 
+" p232
+xnoremap & :&&<CR>
+nnoremap & :&&<CR>
+
+set foldmethod=syntax
+set foldlevelstart=99
+hi Folded ctermbg=235
+nnoremap <space> za
+
 let mapleader = ","
-map <leader>vimrc :tabe ~/.vim/.vimrc<cr>
-map <leader>go :set syntax=go<cr>
-map <leader>grr :w<cr>:!go run % 
-map <leader>gr :w<cr>:!go run %<cr>
-map <leader>gi :GoImports<cr>
+nmap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+au FileType go nmap <leader>go :set syntax=go<cr>
+au FileType go nmap <leader>grr :w<cr>:!go run % 
+au FileType go nmap <leader>gr :w<cr>:!go run %<cr>
+au FileType go nmap <leader>gi :GoImports<cr>
+noremap \ ,
 
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
 
+" command line %% will expand to current directory
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Enable arbitrary backspace editing
@@ -54,8 +72,8 @@ let g:ycm_always_populate_location_list = 1
 
 " Nerd Tree config
 nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
 
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
@@ -81,3 +99,13 @@ let g:airline#extensions#tabline#enabled = 0
 
 " Reload vim config
 autocmd bufwritepost .vimrc source <afile>
+
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
+
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction

@@ -12,16 +12,23 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ycm-core/YouCompleteMe'
+" automatically pairs parentheses, quotes, HTML tags
 Plugin 'tmsvg/pear-tree'
 Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-abolish'
 Plugin 'kana/vim-textobj-entire'
 Plugin 'kana/vim-textobj-user'
 Plugin 'preservim/nerdtree'
-Plugin 'tpope/vim-unimpaired'
 Plugin 'bling/vim-bufferline'
+Plugin 'machakann/vim-highlightedyank'
+Plugin 'vim-scripts/argtextobj.vim'
+Plugin 'easymotion/vim-easymotion'
+packadd! matchit
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
